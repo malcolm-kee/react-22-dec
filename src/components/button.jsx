@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
-export const Button = ({ variant, ...props }) => (
+export const Button = ({ variant, className, ...props }) => (
   <button
     type="button"
-    className={`inline-flex justify-center items-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 ${
-      classByVariant[variant] || ''
-    }`}
+    className={cn(
+      'inline-flex justify-center items-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500',
+      classByVariant[variant],
+      className
+    )}
     {...props}
   />
 );
