@@ -1,10 +1,11 @@
-import * as React from "react";
-import { CareerItem } from "../components/career-item";
+import * as React from 'react';
+import { CareerItem } from '../components/career-item';
+import { TextInput } from '../components/text-input';
 
 const getJobs = (page, signal) => {
   return fetch(
     `https://ecomm-service.herokuapp.com/job?limit=5&page=${page}` +
-      (page === 2 ? "&delay=3000" : ""),
+      (page === 2 ? '&delay=3000' : ''),
     {
       signal,
     }
@@ -12,10 +13,10 @@ const getJobs = (page, signal) => {
 };
 
 const createJob = (data) =>
-  fetch("https://ecomm-service.herokuapp.com/job", {
-    method: "POST",
+  fetch('https://ecomm-service.herokuapp.com/job', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   });
@@ -34,12 +35,12 @@ const usePersistedState = (storageKey, defaultValue) => {
 
 export const Career = () => {
   const [jobs, setJobs] = React.useState(undefined);
-  const [title, setTitle] = usePersistedState("jobTitle", "");
+  const [title, setTitle] = usePersistedState('jobTitle', '');
 
-  const [level, setLevel] = usePersistedState("level", "internship");
-  const [department, setDepartment] = usePersistedState("department", "");
-  const [summary, setSummary] = usePersistedState("summary", "");
-  const [headcount, setHeadcount] = usePersistedState("headcount", 1);
+  const [level, setLevel] = usePersistedState('level', 'internship');
+  const [department, setDepartment] = usePersistedState('department', '');
+  const [summary, setSummary] = usePersistedState('summary', '');
+  const [headcount, setHeadcount] = usePersistedState('headcount', 1);
 
   const titleInputRef = React.useRef();
 
@@ -70,10 +71,10 @@ export const Career = () => {
               headcount: Number(headcount),
             }).then(() => {
               loadJobs();
-              setTitle("");
-              setLevel("internship");
-              setDepartment("");
-              setSummary("");
+              setTitle('');
+              setLevel('internship');
+              setDepartment('');
+              setSummary('');
               setHeadcount(1);
 
               if (titleInputRef.current) {
@@ -89,12 +90,11 @@ export const Career = () => {
               <label className="block text-sm" htmlFor="title">
                 Job Title
               </label>
-              <input
-                type="text"
+              <TextInput
                 name="title"
                 id="title"
                 value={title}
-                onChange={(ev) => setTitle(ev.target.value)}
+                onChangeValue={setTitle}
                 required
                 ref={titleInputRef}
               />
@@ -120,8 +120,7 @@ export const Career = () => {
               <label className="block text-sm" htmlFor="department">
                 Department
               </label>
-              <input
-                type="text"
+              <TextInput
                 value={department}
                 onChange={(ev) => setDepartment(ev.target.value)}
                 name="department"
@@ -180,8 +179,8 @@ export const Career = () => {
               title={job.title}
               department={job.department}
               level={job.level}
-              onEdit={() => alert("Edit btn clicked, populate the form!")}
-              onDelete={() => alert("Delete btn clicked, delete the item!")}
+              onEdit={() => alert('Edit btn clicked, populate the form!')}
+              onDelete={() => alert('Delete btn clicked, delete the item!')}
               key={job._id}
             />
           ))}
