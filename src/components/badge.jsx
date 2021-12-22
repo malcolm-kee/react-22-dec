@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 /**
  * Other than color, all the props will be applied to the span element.
  */
 export const Badge = ({ children, color, className, ...props }) => {
-  console.log({ props });
-
   return (
     <span
       {...props}
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-        classByColor[color] || ''
-      } ${className || ''}`}
+      className={classnames(
+        'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+        classByColor[color],
+        className
+      )}
     >
       {children}
     </span>
@@ -27,5 +28,5 @@ const classByColor = {
 
 Badge.propTypes = {
   children: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(['gray', 'green', 'red', 'yellow']),
+  color: PropTypes.oneOf(['gray', 'green', 'red', 'yellow']).isRequired,
 };
