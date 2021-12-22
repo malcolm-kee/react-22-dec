@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { callAll } from '../util/call-all';
 
-export const TextInput = React.forwardRef(function (
+export const TextInput = React.forwardRef(function TextInput(
   { onChangeValue, onChange, ...props },
   forwardedRef
 ) {
